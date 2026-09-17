@@ -740,152 +740,157 @@
     </div>
 
 
-<!-- THUMBNAIL GALLERY -->
-
-<div
-    class="thumbnail-gallery"
-    id="thumbnailGallery"
->
+    <!-- THUMBNAIL GALLERY -->
 
     <div
-        class="thumbnail-gallery-bg"
-        onclick="closeThumbnailGallery()"
-    ></div>
+        class="thumbnail-gallery"
+        id="thumbnailGallery"
+    >
 
-
-    <div class="thumbnail-gallery-box">
-
-        <!-- CLOSE -->
-
-        <button
-            type="button"
-            class="thumbnail-gallery-close"
+        <div
+            class="thumbnail-gallery-bg"
             onclick="closeThumbnailGallery()"
-            aria-label="Close gallery"
-        >
-            ×
-        </button>
+        ></div>
 
 
-        <!-- TOP -->
+        <div class="thumbnail-gallery-box">
 
-        <div class="thumbnail-gallery-top">
+            <!-- CLOSE -->
 
-            <div>
+            <button
+                type="button"
+                class="thumbnail-gallery-close"
+                onclick="closeThumbnailGallery()"
+                aria-label="Close gallery"
+            >
+                ×
+            </button>
 
-                <p class="thumbnail-gallery-label">
-                    PROJECT 02 / SELECTED WORK
-                </p>
 
-                <h2 class="thumbnail-gallery-title">
-                    THUMBNAILS
-                </h2>
+            <!-- TOP -->
+
+            <div class="thumbnail-gallery-top">
+
+                <div>
+
+                    <p class="thumbnail-gallery-label">
+                        PROJECT 02 / SELECTED WORK
+                    </p>
+
+                    <h2 class="thumbnail-gallery-title">
+                        THUMBNAILS
+                    </h2>
+
+                </div>
+
+
+                <div
+                    class="thumbnail-counter"
+                    id="thumbnailCounter"
+                >
+                    01 / 04
+                </div>
 
             </div>
 
 
-            <div
-                class="thumbnail-counter"
-                id="thumbnailCounter"
-            >
-                01 / 04
+            <!-- MAIN IMAGE -->
+
+            <div class="thumbnail-viewer">
+
+                <button
+                    type="button"
+                    class="thumbnail-nav thumbnail-prev"
+                    onclick="previousThumbnail()"
+                    aria-label="Previous thumbnail"
+                >
+                    ←
+                </button>
+
+
+                <img
+                    id="thumbnailMainImage"
+                    src="./thumbnail1.jpg"
+                    alt="Thumbnail design 01"
+                    loading="eager"
+                >
+
+
+                <button
+                    type="button"
+                    class="thumbnail-nav thumbnail-next"
+                    onclick="nextThumbnail()"
+                    aria-label="Next thumbnail"
+                >
+                    →
+                </button>
+
             </div>
 
-        </div>
 
+            <!-- 4 THUMBNAILS -->
 
-        <!-- MAIN IMAGE -->
+            <div class="thumbnail-list">
 
-        <div class="thumbnail-viewer">
-
-            <button
-                type="button"
-                class="thumbnail-nav thumbnail-prev"
-                onclick="previousThumbnail()"
-                aria-label="Previous thumbnail"
-            >
-                ←
-            </button>
-
-
-            <img
-                id="thumbnailMainImage"
-                src="https://raw.githubusercontent.com/vxn404/portfolio/refs/heads/main/thumbnail1.jpg"
-                alt="Thumbnail design 01"
-            >
-
-
-            <button
-                type="button"
-                class="thumbnail-nav thumbnail-next"
-                onclick="nextThumbnail()"
-                aria-label="Next thumbnail"
-            >
-                →
-            </button>
-
-        </div>
-
-
-        <!-- 4 THUMBNAILS -->
-
-        <div class="thumbnail-list">
-
-            <button
-                type="button"
-                class="thumbnail-item active"
-                onclick="showThumbnail(0)"
-            >
-                <img
-                    src="https://raw.githubusercontent.com/vxn404/portfolio/refs/heads/main/thumbnail1.jpg"
-                    alt="Thumbnail 01"
+                <button
+                    type="button"
+                    class="thumbnail-item active"
+                    onclick="showThumbnail(0)"
                 >
-            </button>
+                    <img
+                        src="./thumbnail1.jpg"
+                        alt="Thumbnail 01"
+                    >
+                </button>
 
 
-            <button
-                type="button"
-                class="thumbnail-item"
-                onclick="showThumbnail(1)"
-            >
-                <img
-                    src="https://raw.githubusercontent.com/vxn404/portfolio/refs/heads/main/thumbnail2.jpg"
-                    alt="Thumbnail 02"
+                <button
+                    type="button"
+                    class="thumbnail-item"
+                    onclick="showThumbnail(1)"
                 >
-            </button>
+                    <img
+                        src="./thumbnail2.jpg"
+                        alt="Thumbnail 02"
+                    >
+                </button>
 
 
-            <button
-                type="button"
-                class="thumbnail-item"
-                onclick="showThumbnail(2)"
-            >
-                <img
-                    src="https://raw.githubusercontent.com/vxn404/portfolio/refs/heads/main/thumbnail3.jpg"
-                    alt="Thumbnail 03"
+                <button
+                    type="button"
+                    class="thumbnail-item"
+                    onclick="showThumbnail(2)"
                 >
-            </button>
+                    <img
+                        src="./thumbnail3.jpg"
+                        alt="Thumbnail 03"
+                    >
+                </button>
 
 
-            <button
-                type="button"
-                class="thumbnail-item"
-                onclick="showThumbnail(3)"
-            >
-                <img
-                    src="https://raw.githubusercontent.com/vxn404/portfolio/refs/heads/main/thumbnail4.jpg"
-                    alt="Thumbnail 04"
+                <button
+                    type="button"
+                    class="thumbnail-item"
+                    onclick="showThumbnail(3)"
                 >
-            </button>
+                    <img
+                        src="./thumbnail4.jpg"
+                        alt="Thumbnail 04"
+                    >
+                </button>
+
+            </div>
 
         </div>
 
     </div>
 
-</div>
-
 
     <script>
+
+        /* =========================
+           PROJECT DATA
+        ========================= */
 
         const projectData = {
 
@@ -928,20 +933,16 @@
             const project =
                 projectData[projectName];
 
-            if (!project) return;
+            if (!modal || !title || !text || !project) {
+                return;
+            }
 
             title.textContent = project.title;
             text.textContent = project.text;
 
-            requestAnimationFrame(() => {
+            modal.classList.add("active");
 
-                modal.classList.add("active");
-
-                document.body.classList.add(
-                    "modal-open"
-                );
-
-            });
+            document.body.classList.add("modal-open");
 
         }
 
@@ -956,8 +957,9 @@
                     ".project-modal-close"
                 );
 
-            if (!modal) return;
-
+            if (!modal) {
+                return;
+            }
 
             if (closeBtn) {
 
@@ -972,7 +974,6 @@
                 );
 
             }
-
 
             setTimeout(() => {
 
@@ -993,13 +994,10 @@
 
         const thumbnailImages = [
 
-            "https://raw.githubusercontent.com/vxn404/portfolio/refs/heads/main/thumbnail1.jpg",
-
-            "https://raw.githubusercontent.com/vxn404/portfolio/refs/heads/main/thumbnail2.jpg",
-
-            "https://raw.githubusercontent.com/vxn404/portfolio/refs/heads/main/thumbnail3.jpg",
-
-            "https://raw.githubusercontent.com/vxn404/portfolio/refs/heads/main/thumbnail4.jpg"
+            "./thumbnail1.jpg",
+            "./thumbnail2.jpg",
+            "./thumbnail3.jpg",
+            "./thumbnail4.jpg"
 
         ];
 
@@ -1014,7 +1012,9 @@
                     "thumbnailGallery"
                 );
 
-            if (!gallery) return;
+            if (!gallery) {
+                return;
+            }
 
             currentThumbnail = 0;
 
@@ -1036,7 +1036,9 @@
                     "thumbnailGallery"
                 );
 
-            if (!gallery) return;
+            if (!gallery) {
+                return;
+            }
 
             gallery.classList.remove("active");
 
@@ -1064,8 +1066,12 @@
                     ".thumbnail-item"
                 );
 
-            if (!image || !counter) return;
+            if (!image || !counter) {
+                return;
+            }
 
+
+            /* CHANGE MAIN IMAGE */
 
             image.src =
                 thumbnailImages[currentThumbnail];
@@ -1078,12 +1084,16 @@
                 ).padStart(2, "0");
 
 
+            /* UPDATE COUNTER */
+
             counter.textContent =
                 String(
                     currentThumbnail + 1
                 ).padStart(2, "0") +
                 " / 04";
 
+
+            /* UPDATE ACTIVE THUMBNAIL */
 
             items.forEach(
                 (item, index) => {
@@ -1192,34 +1202,20 @@
 
 
         /* =========================
-           KEYBOARD
+           KEYBOARD CONTROLS
         ========================= */
 
         document.addEventListener(
             "keydown",
             function(event) {
 
-                if (event.key === "Escape") {
-
-                    closeProjectPopup();
-
-                    closeThumbnailGallery();
-
-                    if (socialToggle) {
-
-                        socialToggle.checked =
-                            false;
-
-                    }
-
-                }
-
-
                 const gallery =
                     document.getElementById(
                         "thumbnailGallery"
                     );
 
+
+                /* THUMBNAIL GALLERY */
 
                 if (
                     gallery &&
@@ -1236,7 +1232,6 @@
 
                     }
 
-
                     if (
                         event.key === "ArrowLeft"
                     ) {
@@ -1245,7 +1240,51 @@
 
                     }
 
+                    if (
+                        event.key === "Escape"
+                    ) {
+
+                        closeThumbnailGallery();
+
+                    }
+
+                    return;
+
                 }
+
+
+                /* OTHER POPUPS */
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    closeProjectPopup();
+
+                    if (socialToggle) {
+
+                        socialToggle.checked =
+                            false;
+
+                    }
+
+                }
+
+            }
+        );
+
+
+        /* =========================
+           INITIAL THUMBNAIL
+        ========================= */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                currentThumbnail = 0;
+
+                updateThumbnailGallery();
 
             }
         );
@@ -1284,4 +1323,4 @@
 
 </body>
 
-    </html>
+            </html>
