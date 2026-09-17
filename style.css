@@ -2914,3 +2914,60 @@ body.thumbnail-open {
   .thumbnail-preview-arrow { width: 38px; height: 38px; font-size: 16px; }
   .thumbnail-preview-arrow.prev { left: 10px; } .thumbnail-preview-arrow.next { right: 10px; }
 }
+/* =========================================
+   PARVEZ — WHITE + PURPLE GLINT
+   ========================================= */
+
+.parvez-glint {
+    position: relative;
+    display: inline-block;
+    color: #fff;
+    overflow: hidden;
+}
+
+/* White + purple shine */
+.parvez-glint::after {
+    content: "";
+    position: absolute;
+    top: -20%;
+    left: -45%;
+    width: 22%;
+    height: 140%;
+
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.15) 20%,
+        rgba(255, 255, 255, 0.95) 45%,
+        rgba(190, 120, 255, 0.9) 60%,
+        rgba(130, 60, 255, 0.35) 75%,
+        transparent 100%
+    );
+
+    filter: blur(4px);
+    transform: skewX(-18deg);
+    pointer-events: none;
+
+    animation: parvezGlint 1.4s ease-out 1.2s 1;
+}
+
+/* Smooth sweep */
+@keyframes parvezGlint {
+    0% {
+        left: -45%;
+        opacity: 0;
+    }
+
+    12% {
+        opacity: 1;
+    }
+
+    55% {
+        opacity: 1;
+    }
+
+    100% {
+        left: 125%;
+        opacity: 0;
+    }
+}
