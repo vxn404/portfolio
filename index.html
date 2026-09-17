@@ -49,10 +49,7 @@
     </nav>
 
 
-    <input
-        type="checkbox"
-        id="socialToggle"
-    >
+    <input type="checkbox" id="socialToggle">
 
 
     <main>
@@ -391,7 +388,7 @@
 
                 <article
                     class="project"
-                    onclick="openProjectPopup('THUMBNAILS')"
+                    onclick="openThumbnailGallery()"
                 >
 
                     <div class="project-bg">T</div>
@@ -697,6 +694,8 @@
     </div>
 
 
+    <!-- PROJECT POPUP -->
+
     <div
         class="project-modal"
         id="projectModal"
@@ -740,6 +739,150 @@
 
     </div>
 
+<!-- THUMBNAIL GALLERY -->
+
+<div
+    class="thumbnail-gallery"
+    id="thumbnailGallery"
+>
+
+    <div
+        class="thumbnail-gallery-bg"
+        onclick="closeThumbnailGallery()"
+    ></div>
+
+
+    <div class="thumbnail-gallery-box">
+
+        <!-- CLOSE -->
+
+        <button
+            type="button"
+            class="thumbnail-gallery-close"
+            onclick="closeThumbnailGallery()"
+            aria-label="Close gallery"
+        >
+            ×
+        </button>
+
+
+        <!-- TOP -->
+
+        <div class="thumbnail-gallery-top">
+
+            <div>
+
+                <p class="thumbnail-gallery-label">
+                    PROJECT 02 / SELECTED WORK
+                </p>
+
+                <h2 class="thumbnail-gallery-title">
+                    THUMBNAILS
+                </h2>
+
+            </div>
+
+
+            <div
+                class="thumbnail-counter"
+                id="thumbnailCounter"
+            >
+                01 / 04
+            </div>
+
+        </div>
+
+
+        <!-- MAIN IMAGE -->
+
+        <div class="thumbnail-viewer">
+
+            <button
+                type="button"
+                class="thumbnail-nav thumbnail-prev"
+                onclick="previousThumbnail()"
+                aria-label="Previous thumbnail"
+            >
+                ←
+            </button>
+
+
+            <img
+                id="thumbnailMainImage"
+                src="content://com.android.providers.media.documents/document/image%3A1000014037"
+                alt="Thumbnail design 01"
+            >
+
+
+            <button
+                type="button"
+                class="thumbnail-nav thumbnail-next"
+                onclick="nextThumbnail()"
+                aria-label="Next thumbnail"
+            >
+                →
+            </button>
+
+        </div>
+
+
+        <!-- 4 THUMBNAILS -->
+
+        <div class="thumbnail-list">
+
+            <button
+                type="button"
+                class="thumbnail-item active"
+                onclick="showThumbnail(0)"
+            >
+                <img
+                    src="content://com.android.providers.media.documents/document/image%3A1000014037"
+                    alt="Thumbnail 01"
+                >
+            </button>
+
+
+            <button
+                type="button"
+                class="thumbnail-item"
+                onclick="showThumbnail(1)"
+            >
+                <img
+                    src="content://com.android.providers.media.documents/document/image%3A1000014038"
+                    alt="Thumbnail 02"
+                >
+            </button>
+
+
+            <button
+                type="button"
+                class="thumbnail-item"
+                onclick="showThumbnail(2)"
+            >
+                <img
+                    src="content://com.android.providers.media.documents/document/image%3A1000014039"
+                    alt="Thumbnail 03"
+                >
+            </button>
+
+
+            <button
+                type="button"
+                class="thumbnail-item"
+                onclick="showThumbnail(3)"
+            >
+                <img
+                    src="content://com.android.providers.media.documents/document/image%3A1000014036"
+                    alt="Thumbnail 04"
+                >
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
 
     <script>
 
@@ -754,7 +897,7 @@
             THUMBNAILS: {
                 title: "THUMBNAILS",
                 text:
-                    "My thumbnail work is not available to showcase at the moment. I'm currently preparing selected pieces for this portfolio."
+                    "My thumbnail work is currently being showcased in this portfolio."
             },
 
             "VIDEO EDITING": {
@@ -765,6 +908,10 @@
 
         };
 
+
+        /* =========================
+           PROJECT POPUP
+        ========================= */
 
         function openProjectPopup(projectName) {
 
@@ -839,14 +986,180 @@
         }
 
 
+        /* =========================
+           THUMBNAIL GALLERY
+        ========================= */
+
+        const thumbnailImages = [
+
+            "content://com.android.providers.media.documents/document/image%3A1000014037",
+
+            "content://com.android.providers.media.documents/document/image%3A1000014038",
+
+            "content://com.android.providers.media.documents/document/image%3A1000014039",
+
+            "content://com.android.providers.media.documents/document/image%3A1000014036"
+
+        ];
+
+
+        let currentThumbnail = 0;
+
+
+        function openThumbnailGallery() {
+
+            const gallery =
+                document.getElementById(
+                    "thumbnailGallery"
+                );
+
+            if (!gallery) return;
+
+            currentThumbnail = 0;
+
+            updateThumbnailGallery();
+
+            gallery.classList.add("active");
+
+            document.body.classList.add(
+                "modal-open"
+            );
+
+        }
+
+
+        function closeThumbnailGallery() {
+
+            const gallery =
+                document.getElementById(
+                    "thumbnailGallery"
+                );
+
+            if (!gallery) return;
+
+            gallery.classList.remove("active");
+
+            document.body.classList.remove(
+                "modal-open"
+            );
+
+        }
+
+
+        function updateThumbnailGallery() {
+
+            const image =
+                document.getElementById(
+                    "thumbnailMainImage"
+                );
+
+            const counter =
+                document.getElementById(
+                    "thumbnailCounter"
+                );
+
+            const items =
+                document.querySelectorAll(
+                    ".thumbnail-item"
+                );
+
+            if (!image || !counter) return;
+
+
+            image.src =
+                thumbnailImages[currentThumbnail];
+
+
+            image.alt =
+                "Thumbnail design " +
+                String(
+                    currentThumbnail + 1
+                ).padStart(2, "0");
+
+
+            counter.textContent =
+                String(
+                    currentThumbnail + 1
+                ).padStart(2, "0") +
+                " / 04";
+
+
+            items.forEach(
+                (item, index) => {
+
+                    item.classList.toggle(
+                        "active",
+                        index === currentThumbnail
+                    );
+
+                }
+            );
+
+        }
+
+
+        function showThumbnail(index) {
+
+            if (
+                index < 0 ||
+                index >= thumbnailImages.length
+            ) {
+                return;
+            }
+
+            currentThumbnail = index;
+
+            updateThumbnailGallery();
+
+        }
+
+
+        function nextThumbnail() {
+
+            currentThumbnail =
+                (
+                    currentThumbnail + 1
+                ) %
+                thumbnailImages.length;
+
+            updateThumbnailGallery();
+
+        }
+
+
+        function previousThumbnail() {
+
+            currentThumbnail =
+                (
+                    currentThumbnail - 1 +
+                    thumbnailImages.length
+                ) %
+                thumbnailImages.length;
+
+            updateThumbnailGallery();
+
+        }
+
+
+        /* =========================
+           SOCIAL POPUP
+        ========================= */
+
         const socialToggle =
-            document.getElementById("socialToggle");
+            document.getElementById(
+                "socialToggle"
+            );
 
         const socialClose =
-            document.getElementById("socialPopupClose");
+            document.getElementById(
+                "socialPopupClose"
+            );
 
 
-        if (socialClose && socialToggle) {
+        if (
+            socialClose &&
+            socialToggle
+        ) {
 
             socialClose.addEventListener(
                 "click",
@@ -866,7 +1179,8 @@
 
                     setTimeout(() => {
 
-                        socialToggle.checked = false;
+                        socialToggle.checked =
+                            false;
 
                     }, 180);
 
@@ -876,6 +1190,10 @@
         }
 
 
+        /* =========================
+           KEYBOARD
+        ========================= */
+
         document.addEventListener(
             "keydown",
             function(event) {
@@ -884,8 +1202,46 @@
 
                     closeProjectPopup();
 
+                    closeThumbnailGallery();
+
                     if (socialToggle) {
-                        socialToggle.checked = false;
+
+                        socialToggle.checked =
+                            false;
+
+                    }
+
+                }
+
+
+                const gallery =
+                    document.getElementById(
+                        "thumbnailGallery"
+                    );
+
+
+                if (
+                    gallery &&
+                    gallery.classList.contains(
+                        "active"
+                    )
+                ) {
+
+                    if (
+                        event.key === "ArrowRight"
+                    ) {
+
+                        nextThumbnail();
+
+                    }
+
+
+                    if (
+                        event.key === "ArrowLeft"
+                    ) {
+
+                        previousThumbnail();
+
                     }
 
                 }
@@ -927,4 +1283,4 @@
 
 </body>
 
-</html>
+    </html>
