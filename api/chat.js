@@ -1,22 +1,14 @@
 export default async function handler(req, res) {
-const allowedOrigins = [
-  "https://vxn404.github.io",
-  "https://portfolio-kappa-blush-10.vercel.app"
-];
+const allowedOrigin = req.headers.origin || "*";
 
-const requestOrigin = req.headers.origin;
-const allowedOrigin = allowedOrigins.includes(requestOrigin)
-  ? requestOrigin
-  : "https://portfolio-kappa-blush-10.vercel.app";
+res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
+res.setHeader("Vary", "Origin");
+res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
-  res.setHeader("Vary", "Origin");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
-  // GitHub Pages → Vercel CORS preflight
-  if (req.method === "OPTIONS") {
-    return res.status(204).end();
+if (req.method === "OPTIONS") {
+  return res.status(204).end();
+}
   }
 
   // Only POST
