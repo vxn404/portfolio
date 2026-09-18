@@ -3129,3 +3129,44 @@ input:focus-visible {
         object-position: center;
     }
 }
+/* PROFILE IMAGE FIX */
+.profile-image-wrap {
+    height: calc(100% - 42px);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.profile-image-wrap picture {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.profile-image-wrap img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* MOBILE PROFILE IMAGE */
+@media (max-width: 600px) {
+    .visual-card {
+        width: 100%;
+        height: 390px;
+    }
+
+    .profile-image-wrap {
+        height: calc(100% - 42px);
+    }
+
+    .profile-image-wrap img {
+        object-fit: cover;
+        object-position: center;
+        
+    }
+    }
