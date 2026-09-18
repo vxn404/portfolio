@@ -3017,3 +3017,36 @@ input:focus-visible {
     object-position: center;
     filter: saturate(.9) contrast(1.05);
 }
+
+/* PROFILE IMAGE - PC + PHONE */
+.profile-image-wrap {
+    height: calc(100% - 42px);
+    width: 100%;
+    overflow: hidden;
+    display: block;
+    position: relative;
+}
+
+.profile-image-wrap picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.profile-image-wrap img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+@media (max-width: 600px) {
+    .profile-image-wrap {
+        height: calc(100% - 42px);
+    }
+
+    .profile-image-wrap img {
+        object-position: center;
+    }
+}
