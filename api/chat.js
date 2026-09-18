@@ -1,5 +1,13 @@
 export default async function handler(req, res) {
-  const allowedOrigin = "https://vxn404.github.io";
+const allowedOrigins = [
+  "https://vxn404.github.io",
+  "https://portfolio-kappa-blush-10.vercel.app"
+];
+
+const requestOrigin = req.headers.origin;
+const allowedOrigin = allowedOrigins.includes(requestOrigin)
+  ? requestOrigin
+  : "https://portfolio-kappa-blush-10.vercel.app";
 
   res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
   res.setHeader("Vary", "Origin");
