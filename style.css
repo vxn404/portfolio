@@ -3185,3 +3185,41 @@ input:focus-visible {
         
     }
     }
+/* PROJECT CARD — CLEAN MOBILE SPACING */
+
+.project-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.project-top span {
+    color: #777;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.project-main p {
+    color: #8b5cff;
+    margin-bottom: 12px;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+}
+
+.project-main h3 {
+    margin-top: 0;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+
+    .project-top {
+        margin-bottom: 24px;
+    }
+
+    .project-main p {
+        margin-bottom: 12px;
+    }
+
+}
